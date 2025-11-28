@@ -24,6 +24,8 @@ class LlamaModel {
         var model_params = llama_model_default_params()
         #if targetEnvironment(simulator)
         model_params.n_gpu_layers = 0
+        #else
+        model_params.n_gpu_layers = Int32(configuration.nGPULayers)
         #endif
 
         guard let model = llama_load_model_from_file(path, model_params) else {
